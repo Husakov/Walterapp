@@ -1,0 +1,52 @@
+
+
+
+<div class="mat-elevation-z8 position">
+  <div><i class="fa fa-cubes" style="font-size:36px;margin-left: 10px;"></i></div>
+
+  <div class="tabela">
+
+    <div class="input-group mb-3 search">
+      <input [(ngModel)]="searchterm"  type="text" class="form-control fa" placeholder="&#xf002; Pretrazivanje" aria-label="Recipient's username" aria-describedby="basic-addon2">
+      <div>
+        <button type="button" style="margin-left: 970px" class="btn btn-light" (click)="showadd=!showadd" >Dodaj</button>
+      </div>
+
+    </div>
+    <div class="form-group input-group" style="margin-left: 20px; width: 250px" *ngIf="showadd">
+      <label for="exampleFormControlSelect1">Dodajte radnika</label>
+      <select class="form-control" id="exampleFormControlSelect1" style="width: 150px" [(ngModel)]="name">
+
+        <option *ngFor="let employee of employees;let x=index;">{{employee.name}}</option>
+
+      </select>
+      <div style="color:grey">vrijeme dolaska:</div>
+      <input [(ngModel)]="time" style="background-color: white;width: 70px" placeholder="24:00">
+      <div>
+        <button type="button"  class="btn btn-light" (click)="addemployee()" >Dodati</button>
+      </div>
+    </div>
+
+    <table class="table table-hover table-dark">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Uposlenik</th>
+        <th scope="col">Vrijeme dolaska</th>
+        <th scope="col">Dosao na vrijeme</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let item of dailyscrumlist | filter:searchterm ;let i=index;">
+      <tr>
+        <th scope="row">i</th>
+        <td>{{item.name}}</td>
+        <td>{{item.time}}</td>
+        <td>{{item.onTime}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+    <i class="fa fa-line-chart" style="font-size:36px"></i>
+
+      </div>
+    </div>

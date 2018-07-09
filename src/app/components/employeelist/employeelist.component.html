@@ -1,0 +1,38 @@
+
+
+
+<div class="mat-elevation-z8 position">
+<div><i class="fa fa-cubes" style="font-size:36px;margin-left: 10px;"></i></div>
+
+<div class="tabela">
+
+  <div class="input-group mb-3 search">
+    <input [(ngModel)]="searchterm"  type="text" class="form-control fa" placeholder="&#xf002; Pretrazivanje" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+    </div>
+  </div>
+
+  <table class="table table-striped">
+
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Uposlenik</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let employee of employees | filter:searchterm ;let i=index ">
+
+    <tr>
+      <th scope="row">{{employee.id}}</th>
+      <td>{{employee.name}}</td>
+      <td class="edit"><a  (click)="edit()"><i class="fa fa-edit"></i></a></td>
+      <td class="delete"><a  (click)="deleteemployee(employee.name)"><i class="fa fa-remove"></i></a></td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+  <h6 style="margin-left: 10px;margin-bottom:5px;border-top:1px solid darkgrey;">Broj zaposlenih:  {{employees.length}}</h6>
+</div>
