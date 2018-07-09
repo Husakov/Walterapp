@@ -9,6 +9,10 @@ import {EMPLOYEES} from '../employeedata/employeedata';
 })
 export class EmployeelistComponent implements OnInit {
   employees = EMPLOYEES;
+  showedit=false;
+  showdodaj=false;
+  name="";
+  editname="";
 
 
   ngOnInit() {
@@ -24,6 +28,32 @@ export class EmployeelistComponent implements OnInit {
         this.employees.splice(j, 1);
       }
     }
+  }
+  edit(i){
+    let object={id:i+1, name: "", edit: false};
+    object.name=this.editname;
+    object.edit= false;
+    this.employees[i].name=object.name;
+    this.employees[i].edit=false;
+    this.showedit=!this.showedit;
+
+  }
+  showothers(s) {
+let i=0;
+    this.employees.forEach(item => {
+      if (item.id != this.employees[s].id) {
+        this.employees[i].edit = false;
+        console.log(this.employees[i].edit);
+      }
+      i++;
+    });
+  }
+
+  addemployee(){
+    let object={id:this.employees.length+1, name: "", edit: false};
+    object.name=this.name;
+    object.edit= false;
+    this.employees.push(object);
 
   }
 }

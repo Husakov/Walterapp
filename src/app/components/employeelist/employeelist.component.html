@@ -11,6 +11,12 @@
     <div class="input-group-append">
     </div>
   </div>
+  <button (click)="showdodaj=!showdodaj" class="btn btn-light" style="background-color: darkgrey;color: darkblue">Dodaj</button>
+  <div style="margin-top: 3px" *ngIf="showdodaj">
+    <input [(ngModel)]="name" placeholder="ovdje unesite ime">
+    <a  style="margin-left: 10px" (click)="addemployee()">snimi  <i class="fa fa-save"></i></a>
+    <a  style="margin-left: 10px" (click)="showdodaj=!showdodaj">odbaci  <i class="fa fa-remove"></i></a>
+  </div>
 
   <table class="table table-striped">
 
@@ -22,13 +28,19 @@
       <th scope="col"></th>
     </tr>
     </thead>
-    <tbody *ngFor="let employee of employees | filter:searchterm ;let i=index ">
+    <tbody *ngFor="let employee of employees | filter:searchterm ;let i=index " style="background-color: darkgrey;color: white">
 
-    <tr>
-      <th scope="row">{{employee.id}}</th>
+    <tr *ngIf="showedit==false && employee.edit==false">
+      <th scope="row">{{i+1}}</th>
       <td>{{employee.name}}</td>
-      <td class="edit"><a  (click)="edit()"><i class="fa fa-edit"></i></a></td>
-      <td class="delete"><a  (click)="deleteemployee(employee.name)"><i class="fa fa-remove"></i></a></td>
+      <td class="edit"><a  (click)="(showedit=!showedit)&&(employee.edit=true);showothers(i)">uredi <i class="fa fa-edit"></i></a></td>
+      <td class="delete"><a  (click)="deleteemployee(employee.name)">izbriši <i class="fa fa-remove"></i></a></td>
+    </tr>
+    <tr *ngIf="showedit==true && employee.edit==true ">
+      <th scope="row">{{employee.id}}</th>
+      <td><input [(ngModel)]="editname" placeholder="{{employee.name}}"></td>
+      <td class="edit"><a  (click)="edit(i)">snimi<i class="fa fa-sign-in"></i></a></td>
+      <td class="delete"><a  (click)="showedit=false">odbaci<i class="fa fa-remove"></i></a></td>
     </tr>
 
     </tbody>

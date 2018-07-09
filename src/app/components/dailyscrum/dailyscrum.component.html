@@ -9,10 +9,10 @@
     <div class="input-group mb-3 search">
       <input [(ngModel)]="searchterm"  type="text" class="form-control fa" placeholder="&#xf002; Pretrazivanje" aria-label="Recipient's username" aria-describedby="basic-addon2">
       <div>
-        <button type="button" style="margin-left: 970px" class="btn btn-light" (click)="showadd=!showadd" >Dodaj</button>
       </div>
 
     </div>
+    <button type="button" style="margin-left: 70px;background-color: darkgrey;color: darkblue" class="btn btn-light" (click)="showadd=!showadd" >Dodaj</button>
     <div class="form-group input-group" style="margin-left: 20px; width: 250px" *ngIf="showadd">
       <label for="exampleFormControlSelect1">Dodajte radnika</label>
       <select class="form-control" id="exampleFormControlSelect1" style="width: 150px" [(ngModel)]="name">
@@ -36,17 +36,33 @@
         <th scope="col">Dosao na vrijeme</th>
       </tr>
       </thead>
-      <tbody *ngFor="let item of dailyscrumlist | filter:searchterm ">
-      <tr>
+      <tbody *ngFor="let item of dailyscrumlist | filter:searchterm ;let i=index;">
+      <tr *ngIf="editdailylist==false">
         <th scope="row"><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
+            <button type="button" class="btn btn-secondary" (click)="(editdailylist=!editdailylist);item.edit=true;"><i class="fa fa-edit"></i></button>
             <button type="button" class="btn btn-secondary" (click)="delete(item.name)"><i class="fa fa-remove"></i></button>
           </div>
         </div></th>
         <td>{{item.name}}</td>
         <td>{{item.time}}</td>
         <td>{{item.onTime}}</td>
+      </tr>
+      <tr *ngIf="editdailylist==true && item.edit==true ">
+
+        <th scope="row">{{item.id}}</th>
+        <td>
+          <label for="exampleFormControlSelect1">Dodajte radnika</label>
+          <select class="form-control" style="width: 150px" [(ngModel)]="newname">
+
+            <option *ngFor="let employee of employees;let x=index;">{{employee.name}}</option>
+
+          </select>
+          <div style="color:grey">vrijeme dolaska:</div>
+          <input [(ngModel)]="newtime" style="background-color: white;width: 70px;margin-top: 2px;margin-left: 3px" placeholder="24:00">
+        </td>
+        <td class="edit"><a  (click)="edit(i)">snimi<i class="fa fa-sign-in"></i></a></td>
+        <td class="delete"><a  (click)="editdailylist=!editdailylist">odbaci<i class="fa fa-remove"></i></a></td>
       </tr>
 
       </tbody>
