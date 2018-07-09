@@ -30,4 +30,16 @@ addemployee(){
 console.log(this.dailyscrumlist);
 
 }
+delete(name){
+    console.log(name);
+
+    for (var j = 0; j < this.dailyscrumlist.length; j++) {
+
+      if (this.dailyscrumlist[j]["name"] == name) {
+        this.dailyscrumlist.splice(j, 1);
+      }
+    }
+
+
+}
 }

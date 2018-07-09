@@ -21,7 +21,7 @@
 
       </select>
       <div style="color:grey">vrijeme dolaska:</div>
-      <input [(ngModel)]="time" style="background-color: white;width: 70px" placeholder="24:00">
+      <input [(ngModel)]="time" style="background-color: white;width: 70px;margin-top: 2px;margin-left: 3px" placeholder="24:00">
       <div>
         <button type="button"  class="btn btn-light" (click)="addemployee()" >Dodati</button>
       </div>
@@ -30,15 +30,20 @@
     <table class="table table-hover table-dark">
       <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">uredjivanje</th>
         <th scope="col">Uposlenik</th>
         <th scope="col">Vrijeme dolaska</th>
         <th scope="col">Dosao na vrijeme</th>
       </tr>
       </thead>
-      <tbody *ngFor="let item of dailyscrumlist | filter:searchterm ;let i=index;">
+      <tbody *ngFor="let item of dailyscrumlist | filter:searchterm ">
       <tr>
-        <th scope="row">i</th>
+        <th scope="row"><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
+            <button type="button" class="btn btn-secondary" (click)="delete(item.name)"><i class="fa fa-remove"></i></button>
+          </div>
+        </div></th>
         <td>{{item.name}}</td>
         <td>{{item.time}}</td>
         <td>{{item.onTime}}</td>
